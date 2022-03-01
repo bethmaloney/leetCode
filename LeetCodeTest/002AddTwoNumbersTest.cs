@@ -6,50 +6,14 @@ using NUnit.Framework;
 namespace LeetCodeTest
 {
     public class AddTwoNumbersTest {
-
-        private ListNode ConvertArrayToListNode(int[] array)
-        {
-            ListNode list = null;
-            ListNode currentNode = null;
-
-            foreach (var element in array)
-            {
-                if (currentNode is null)
-                {
-                    list = new ListNode();
-                    currentNode = list;
-                }
-                else
-                {
-                    currentNode.next = new ListNode();
-                    currentNode = currentNode.next;
-                }
-                currentNode.val = element;
-            }
-
-            return list;
-        }
-
-        private int[] ConvertListNodeToArray(ListNode list)
-        {
-            var array = new List<int>();
-            
-            while (list != null)
-            {
-                array.Add(list.val);
-                list = list.next;
-            }
-
-            return array.ToArray();
-        }
-
+        
         [TestCaseSource(nameof(_data))]
         public void TwoSum_ShouldReturn_CorrectValues(int[] list1, int[] list2, int[] expectedResult)
         {
             var addNumbers = new AddTwoNumbers();
-            var result = addNumbers.CalculateResult(ConvertArrayToListNode(list1), ConvertArrayToListNode(list2));
+            var result = addNumbers.CalculateResult(ListNode.ConvertArrayToListNode(list1), ListNode.ConvertArrayToListNode(list2));
             
-            Assert.That(ConvertListNodeToArray(result), Is.EquivalentTo(expectedResult));
+            Assert.That(ListNode.ConvertListNodeToArray(result), Is.EquivalentTo(expectedResult));
         }
         
         private static TestCaseData[] _data = {
